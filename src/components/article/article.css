@@ -1,0 +1,12 @@
+.article{
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    width: 941px;
+    min-height: 100%;
+    margin-bottom: 25px;
+}
+.article-content{
+    padding-left: 19px;
+    padding-right: 49px;
+}
