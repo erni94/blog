@@ -3,16 +3,16 @@ import { Route, Routes } from 'react-router-dom';
 
 import './app.css';
 import Layout from '../../routes/Layout';
-import PostsList from '../posts-list/posts-list';
 import ArticlePage from '../../routes/atriclePage';
+import ArticlesPage from '../../routes/articlesPage';
 
 const App = () => {
   return (
     <Routes>
       <Route path={'/'} element={<Layout />}>
-        <Route index element={<PostsList />} />
-        <Route path={'articles'} element={<PostsList />} />
-        <Route path={'articles/:id'} element={<ArticlePage />} />
+        <Route index element={<ArticlesPage />} />
+        <Route path={'articles'} element={<ArticlesPage />} />
+        <Route path={'articles/:slug'} element={<ArticlePage />} />
       </Route>
     </Routes>
   );
