@@ -38,7 +38,6 @@ const mainSlice = createSlice({
       };
       state.isLoggedIn = false;
       localStorage.clear();
-      ;
     },
   },
 });

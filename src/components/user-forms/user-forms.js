@@ -11,7 +11,6 @@ import { validSchemaEdit, validSchemaLog, validSchemaReg } from '../../utils/yup
 import { useLoginUserMutation, useRegisterUserMutation, useUpdateUserMutation } from '../../store/commonAPI';
 import { setIsLoggedIn, setUser } from '../../store/reducers';
 
-
 const ErrorMessage = ({ message }) => {
   return <span className={'user-form__error'}>{message}</span>;
 };
@@ -46,41 +45,41 @@ export const RegisterForm = () => {
     <div className={'user-form'}>
       <h2 className={'user-form__title'}>Create new account</h2>
       <form className={'form'} onSubmit={handleSubmit(onSubmit)}>
-        <label className='input-label'>
+        <label className="input-label">
           Username
           <input
             className={`user-form__input ${errors.username ? 'error' : ''}`}
             {...register('username')}
-            placeholder='Enter your username'
+            placeholder="Enter your username"
           />
           {errors.username && <ErrorMessage message={errors.username.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
             {...register('email')}
-            placeholder='Enter your email address'
+            placeholder="Enter your email address"
           />
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Password
           <input
             className={`user-form__input ${errors.password ? 'error' : ''}`}
-            type='password'
+            type="password"
             {...register('password')}
-            placeholder='Enter your password'
+            placeholder="Enter your password"
           />
           {errors.password && <ErrorMessage message={errors.password.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Repeat Password
           <input
             className={`user-form__input ${errors.repeatPassword ? 'error' : ''}`}
-            type='password'
+            type="password"
             {...register('repeatPassword')}
-            placeholder='Repeat your password'
+            placeholder="Repeat your password"
           />
           {errors.repeatPassword && <ErrorMessage message={errors.repeatPassword.message} />}
         </label>
@@ -88,7 +87,7 @@ export const RegisterForm = () => {
           I agree to the processing of my personal information
         </Checkbox>
         {errors.agree && <ErrorMessage message={errors.agree.message} />}
-        <Button type='primary' htmlType='submit' style={{ width: '319px', height: '40px', marginTop: '20px' }}>
+        <Button type="primary" htmlType="submit" style={{ width: '319px', height: '40px', marginTop: '20px' }}>
           Submit
         </Button>
       </form>
@@ -128,26 +127,26 @@ export const LoginForm = () => {
     <div className={'user-form'}>
       <h2 className={'user-form__title'}>Sign In</h2>
       <form className={'form'} onSubmit={handleSubmit(onSubmit)}>
-        <label className='input-label'>
+        <label className="input-label">
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
             {...register('email')}
-            placeholder='Enter your email address'
+            placeholder="Enter your email address"
           />
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Password
           <input
             className={`user-form__input ${errors.password ? 'error' : ''}`}
-            type='password'
+            type="password"
             {...register('password')}
-            placeholder='Enter your password'
+            placeholder="Enter your password"
           />
           {errors.password && <ErrorMessage message={errors.password.message} />}
         </label>
-        <Button type='primary' htmlType='submit' style={{ width: '319px', height: '40px', marginTop: '20px' }}>
+        <Button type="primary" htmlType="submit" style={{ width: '319px', height: '40px', marginTop: '20px' }}>
           Login
         </Button>
       </form>
@@ -187,7 +186,7 @@ export const EditProfileForm = () => {
     <div className={'user-form'}>
       <h2 className={'user-form__title'}>Edit Profile</h2>
       <form className={'form'} onSubmit={handleSubmit(onSubmit)}>
-        <label className='input-label'>
+        <label className="input-label">
           Username
           <input
             className={`user-form__input ${errors.username ? 'error' : ''}`}
@@ -196,7 +195,7 @@ export const EditProfileForm = () => {
           />
           {errors.username && <ErrorMessage message={errors.username.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
@@ -205,26 +204,26 @@ export const EditProfileForm = () => {
           />
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Repeat Password
           <input
             className={`user-form__input ${errors.newPassword ? 'error' : ''}`}
-            type='password'
+            type="password"
             {...register('newPassword')}
-            placeholder='Repeat your password'
+            placeholder="Repeat your password"
           />
           {errors.newPassword && <ErrorMessage message={errors.newPassword.message} />}
         </label>
-        <label className='input-label'>
+        <label className="input-label">
           Avatar image (url)
           <input
             className={`user-form__input ${errors.imgUrl ? 'error' : ''}`}
             {...register('imgUrl')}
-            placeholder='Avatar image'
+            placeholder="Avatar image"
           />
           {errors.imgUrl && <ErrorMessage message={errors.imgUrl.message} />}
         </label>
-        <Button type='primary' htmlType='submit' style={{ width: '319px', height: '40px', marginTop: '20px' }}>
+        <Button type="primary" htmlType="submit" style={{ width: '319px', height: '40px', marginTop: '20px' }}>
           Submit
         </Button>
       </form>

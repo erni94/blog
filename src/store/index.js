@@ -12,7 +12,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonAPI.middleware),
 });
 
-
 const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
 
 if (isLoggedIn) {
