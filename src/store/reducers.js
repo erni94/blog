@@ -6,8 +6,10 @@ const mainSlice = createSlice({
     article: null,
     isLoggedIn: false,
     user: {
+      email: '',
       token: '',
       username: '',
+      bio: '',
       image: '',
     },
   },
@@ -18,7 +20,7 @@ const mainSlice = createSlice({
     setArticlesCount(state, action) {
       state.articlesCount = action.payload;
     },
-    isLoggedIn(state, action) {
+    setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
     },
     setUser(state, action) {
@@ -26,5 +28,7 @@ const mainSlice = createSlice({
     },
   },
 });
+
+export const { setIsLoggedIn, setUser } = mainSlice.actions; // Экспорт экшенов
 
 export default mainSlice.reducer;

@@ -1,4 +1,1 @@
-const loggingIn = (userData) => {
-
-
-};
+const loggingIn = (userData) => {};

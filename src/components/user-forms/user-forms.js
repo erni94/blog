@@ -4,8 +4,12 @@ import { Button, Checkbox } from 'antd';
 
 import './user-forms.css';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { validSchemaEdit, validSchemaLog, validSchemaReg } from '../../utils/yupScheme';
+import { useLoginUserMutation, useRegisterUserMutation, useUpdateUserMutation } from '../../store/commonAPI';
+import { setIsLoggedIn, setUser } from '../../store/reducers';
 
 
 const ErrorMessage = ({ message }) => {
@@ -22,9 +26,21 @@ export const RegisterForm = () => {
     resolver: yupResolver(validSchemaReg),
     mode: 'onBlur',
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data); // Сброс данных формы после успешной отправки
+  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
+
+  const onSubmit = async (data) => {
+    try {
+      const { user } = await registerUser(data).unwrap();
+      dispatch(setIsLoggedIn(true));
+      console.log(user);
+      dispatch(setUser(user));
+      navigate('/articles');
+    } catch (err) {
+      console.error('Registration failed:', err);
+    }
   };
 
   return (
@@ -80,9 +96,9 @@ export const RegisterForm = () => {
 
       <div className={'user-form__description'}>
         <p>Already have an account? </p>{' '}
-        <a className={'user-form__link'} href='#'>
+        <Link className={'user-form__link'} to={'/sign-in'}>
           Sign In.
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -98,8 +114,15 @@ export const LoginForm = () => {
     mode: 'onBlur',
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    const { user } = await loginUser(data).unwrap();
+    dispatch(setIsLoggedIn(true));
+    dispatch(setUser(user));
+    navigate('/articles');
   };
 
   return (
@@ -131,9 +154,9 @@ export const LoginForm = () => {
       </form>
       <div className={'user-form__description'}>
         <p>Don’t have an account?</p>{' '}
-        <a className={'user-form__link'} href='#'>
+        <Link className={'user-form__link'} to={'/sign-up'}>
           Sign Up.
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -149,8 +172,16 @@ export const EditProfileForm = () => {
     mode: 'onBlur',
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [updateUser, { isLoading, isError }] = useUpdateUserMutation();
+  const usernameSate = useSelector((state) => state.rootReducer.user.username);
+  const emailState = useSelector((state) => state.rootReducer.user.email);
+
+  const onSubmit = async (data) => {
+    const { user } = await updateUser(data).unwrap();
+    dispatch(setUser(user));
+    navigate('/profile');
   };
 
   return (
@@ -162,7 +193,7 @@ export const EditProfileForm = () => {
           <input
             className={`user-form__input ${errors.username ? 'error' : ''}`}
             {...register('username')}
-            placeholder='Enter your username'
+            value={usernameSate}
           />
           {errors.username && <ErrorMessage message={errors.username.message} />}
         </label>
@@ -171,7 +202,7 @@ export const EditProfileForm = () => {
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
             {...register('email')}
-            placeholder='Enter your email address'
+            value={emailState}
           />
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </label>
