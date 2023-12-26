@@ -22,13 +22,27 @@ const mainSlice = createSlice({
     },
     setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
+      localStorage.setItem('isLoggedIn', JSON.stringify(action.payload));
     },
     setUser(state, action) {
       state.user = action.payload;
+      localStorage.setItem('user', JSON.stringify(action.payload));
+    },
+    logOut(state) {
+      state.user = {
+        email: '',
+        token: '',
+        username: '',
+        bio: '',
+        image: '',
+      };
+      state.isLoggedIn = false;
+      localStorage.clear();
+      ;
     },
   },
 });
 
-export const { setIsLoggedIn, setUser } = mainSlice.actions; // Экспорт экшенов
+export const { setIsLoggedIn, setUser, logOut } = mainSlice.actions; // Экспорт экшенов
 
 export default mainSlice.reducer;

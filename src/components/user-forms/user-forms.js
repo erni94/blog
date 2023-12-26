@@ -35,7 +35,6 @@ export const RegisterForm = () => {
     try {
       const { user } = await registerUser(data).unwrap();
       dispatch(setIsLoggedIn(true));
-      console.log(user);
       dispatch(setUser(user));
       navigate('/articles');
     } catch (err) {
