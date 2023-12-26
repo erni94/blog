@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 .user-form {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Roboto, Arial;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,27 +31,31 @@
     justify-content: center;
 }
 
-.input-wrapper {
-    margin-bottom: 12px;
-}
 
 .user-form__input {
+    padding: 0 12px;
     width: 320px;
     height: 40px;
     border-radius: 4px;
     border: 1px solid #D9D9D9;
     background: #FFF;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 24px;
 }
+
+.user-form__input.error {
+    border-color: #F5222D;
+}
+
 
 .input-label {
     color: #262626;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 22px
+    line-height: 22px;
+    margin-bottom: 12px;
 }
 
 .user-form__description {
@@ -70,4 +74,12 @@
     color: #1890FF;
     margin-left: 2px;
     text-decoration: none;
+}
+
+
+.user-form__error {
+    font-family: Roboto, Inter, sans-serif;
+    color: #F5222D;
+    font-size: 12px;
+    line-height: 22px;
 }

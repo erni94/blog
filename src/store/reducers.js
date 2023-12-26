@@ -4,6 +4,12 @@ const mainSlice = createSlice({
   name: 'main',
   initialState: {
     article: null,
+    isLoggedIn: false,
+    user: {
+      token: '',
+      username: '',
+      image: '',
+    },
   },
   reducers: {
     setArticles(state, action) {
@@ -14,6 +20,9 @@ const mainSlice = createSlice({
     },
     isLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
+    },
+    setUser(state, action) {
+      state.user = action.payload;
     },
   },
 });
