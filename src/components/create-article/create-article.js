@@ -1,19 +1,14 @@
 import { Button } from 'antd';
 
-
 import './create-article.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import { validSchemaArticle } from '../../utils/yupScheme';
-import { useState } from 'react';
 import { CreateTags, Tags } from '../create-tags/create-tags';
 
-
 const CreateArticle = (props) => {
-
   const {
     register,
     formState: { errors },
@@ -24,41 +19,51 @@ const CreateArticle = (props) => {
     mode: 'onBlur',
   });
 
-
   const [createArticle, setCreateArticle] = useState(props);
 
-  const addTag = (value) => {
+  const fetchArticle = props.fetchArticle;
 
+  const addTag = (value) => {
     setCreateArticle((prev) => {
       return {
         ...prev,
         tagList: [...prev.tagList, value],
       };
     });
-
   };
 
   const deleteTag = (value) => {
     setCreateArticle((prev) => {
       return {
         ...prev,
-        tagList: prev.tagList.filter(tag => tag !== value),
+        tagList: prev.tagList.filter((tag) => tag !== value),
       };
     });
   };
 
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      const result = {
+        article: {
+          title: data.title,
+          description: data.shortDescription,
+          body: data.text,
+          tagList: createArticle.tagList,
+        },
+      };
+      if (props.slug) {
+        console.log(result, props.slug);
+        await fetchArticle({
+          data: result,
+          slug: props.slug,
+        });
+      } else {
+        await fetchArticle(result);
+      }
     } catch (err) {
-      console.error('Registration failed:', err);
+      console.error('Failed:', err);
     }
   };
-
 
   return (
     <form className={'create-article'} onSubmit={handleSubmit(onSubmit)}>
@@ -68,7 +73,7 @@ const CreateArticle = (props) => {
         <input
           className={`create-article__input ${errors.title ? 'error' : ''}`}
           {...register('title')}
-          value={createArticle.title}
+          defaultValue={createArticle.title}
           placeholder={'Title'}
         />
       </label>
@@ -77,7 +82,7 @@ const CreateArticle = (props) => {
         <input
           className={`create-article__input ${errors.shortDescription ? 'error' : ''}`}
           {...register('shortDescription')}
-          value={createArticle.shortDescription}
+          defaultValue={createArticle.shortDescription}
           placeholder={'Title'}
         />
       </label>
@@ -87,7 +92,7 @@ const CreateArticle = (props) => {
           <textarea
             className={`create-article__input-text ${errors.text ? 'error' : ''}`}
             {...register('text')}
-            value={createArticle.text}
+            defaultValue={createArticle.text}
             placeholder={'Text'}
           />
         </label>
@@ -96,11 +101,9 @@ const CreateArticle = (props) => {
         <label className={'create-article__label'}>
           Tags:
           <div>
-            {createArticle.tagList.length !== 0 ? (
-              createArticle.tagList.map((tag) => (
-                <Tags key={tag} tag={tag} deleteTag={deleteTag} />
-              ))
-            ) : null}
+            {createArticle.tagList.length !== 0
+              ? createArticle.tagList.map((tag) => <Tags key={tag} tag={tag} deleteTag={deleteTag} />)
+              : null}
           </div>
           <CreateTags addTag={addTag} />
         </label>
@@ -112,6 +115,5 @@ const CreateArticle = (props) => {
     </form>
   );
 };
-
 
 export default CreateArticle;

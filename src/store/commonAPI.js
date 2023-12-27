@@ -40,16 +40,24 @@ export const api = createApi({
     createArticle: build.mutation({
       query(articleData) {
         return {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          },
           url: '/articles',
           method: 'POST',
-          body: { article: articleData },
+          body: { articleData },
         };
       },
     }),
     editArticle: build.mutation({
-      query(articleData) {
+      query({ articleData, slug }) {
         return {
-          url: `/articles/${articleData.slug}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          },
+          url: `/articles/${slug}`,
           method: 'PUT',
           body: { article: articleData },
         };
@@ -58,6 +66,10 @@ export const api = createApi({
     deleteArticle: build.mutation({
       query(slug) {
         return {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          },
           url: `/articles/${slug}`,
           method: 'DELETE',
         };

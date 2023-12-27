@@ -2,7 +2,6 @@ import { Button } from 'antd';
 import './create-tags.css';
 import { useState } from 'react';
 
-
 export const CreateTags = ({ addTag }) => {
   const [tagValue, setTagValue] = useState('');
 
@@ -19,45 +18,23 @@ export const CreateTags = ({ addTag }) => {
 
   return (
     <div className={'create-tags'}>
-      <input
-        className={'create-tags__input'}
-        placeholder={'Tag'}
-        value={tagValue}
-        onChange={handleInputChange}
-      />
-      <Button
-        type='primary'
-        ghost
-        danger
-        className={'create-tags__button-delete'}
-        size={'large'}
-      >
+      <input className={'create-tags__input'} placeholder={'Tag'} value={tagValue} onChange={handleInputChange} />
+      <Button type="primary" ghost danger className={'create-tags__button-delete'} size={'large'}>
         Delete
       </Button>
-      <Button
-        type='primary'
-        ghost
-        className={'create-tags__button-add'}
-        size={'large'}
-        onClick={handleAddTag}
-      >
+      <Button type="primary" ghost className={'create-tags__button-add'} size={'large'} onClick={handleAddTag}>
         Add Tag
       </Button>
     </div>
   );
 };
 
-
 export const Tags = ({ tag, deleteTag }) => {
   return (
     <div className={'create-tags'}>
-      <input
-        className={'create-tags__input'}
-        placeholder={'Tag'}
-        defaultValue={tag}
-      />
+      <input className={'create-tags__input'} placeholder={'Tag'} defaultValue={tag} />
       <Button
-        type='primary'
+        type="primary"
         ghost
         danger
         className={'create-tags__button-delete'}
