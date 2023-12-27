@@ -38,4 +38,10 @@ const validSchemaEdit = yup.object().shape({
   imgUrl: yup.string().url('Invalid URL for image').required('Avatar image URL is required'),
 });
 
-export { validSchemaReg, validSchemaLog, validSchemaEdit };
+const validSchemaArticle = yup.object().shape({
+  title: yup.string().required('Title is required'),
+  shortDescription: yup.string().required('Short description is required'),
+  text: yup.string().required('Text is required'),
+});
+
+export { validSchemaReg, validSchemaLog, validSchemaEdit, validSchemaArticle };

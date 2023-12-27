@@ -58,6 +58,7 @@ export const RegisterForm = () => {
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
+            type="email"
             {...register('email')}
             placeholder="Enter your email address"
           />
@@ -131,6 +132,7 @@ export const LoginForm = () => {
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
+            type="email"
             {...register('email')}
             placeholder="Enter your email address"
           />
@@ -199,6 +201,7 @@ export const EditProfileForm = () => {
           Email address
           <input
             className={`user-form__input ${errors.email ? 'error' : ''}`}
+            type="email"
             {...register('email')}
             value={emailState}
           />

@@ -37,6 +37,32 @@ export const api = createApi({
         };
       },
     }),
+    createArticle: build.mutation({
+      query(articleData) {
+        return {
+          url: '/articles',
+          method: 'POST',
+          body: { article: articleData },
+        };
+      },
+    }),
+    editArticle: build.mutation({
+      query(articleData) {
+        return {
+          url: `/articles/${articleData.slug}`,
+          method: 'PUT',
+          body: { article: articleData },
+        };
+      },
+    }),
+    deleteArticle: build.mutation({
+      query(slug) {
+        return {
+          url: `/articles/${slug}`,
+          method: 'DELETE',
+        };
+      },
+    }),
   }),
 });
 
@@ -46,5 +72,8 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useUpdateUserMutation,
+  useCreateArticleMutation,
+  useEditArticleMutation,
+  useDeleteArticleMutation,
 } = api;
 export default api;

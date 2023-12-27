@@ -8,6 +8,7 @@ import ArticlesPage from '../../routes/articlesPage';
 import RegisterPage from '../../routes/registerPage';
 import LoginPage from '../../routes/loginPage';
 import EditProfilePage from '../../routes/editProfilePage';
+import CreateArticlePage from '../../routes/createArticlePage';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path={'sign-up'} element={<RegisterPage />} />
         <Route path={'sign-in'} element={<LoginPage />} />
         <Route path={'profile'} element={<EditProfilePage />} />
+        <Route path={'new-article'} element={<CreateArticlePage />} />
       </Route>
     </Routes>
   );
