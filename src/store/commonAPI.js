@@ -1,14 +1,35 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const user = JSON.parse(localStorage.getItem('user'));
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api/' }),
+  keepUnusedDataFor: 0,
   endpoints: (build) => ({
     getArticles: build.query({
       method: 'GET',
-      query: (offset = 0) => `articles?offset=${offset}&limit=5`,
+      query: (offset = 0) => ({
+        url: `articles?offset=${offset}&limit=5`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: user && user.token ? `Token ${user.token}` : '',
+        },
+        providesTags: ['Articles'],
+      }),
     }),
     getArticle: build.query({
-      query: (slug) => `articles/${slug}`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: user && user.token ? `Token ${user.token}` : '',
+      },
+      method: 'GET',
+      query: (slug) => ({
+        url: `articles/${slug}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: user && user.token ? `Token ${user.token}` : '',
+        },
+      }),
     }),
     registerUser: build.mutation({
       query(userData) {
@@ -31,6 +52,10 @@ export const api = createApi({
     updateUser: build.mutation({
       query(userData) {
         return {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${user.token}`,
+          },
           url: '/user',
           method: 'PUT',
           body: { user: userData },
@@ -42,24 +67,25 @@ export const api = createApi({
         return {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Token ${localStorage.getItem('token')}`,
+            Authorization: `Token ${user.token}`,
           },
           url: '/articles',
           method: 'POST',
-          body: { articleData },
+          body: articleData,
         };
       },
     }),
     editArticle: build.mutation({
-      query({ articleData, slug }) {
+      query({ data, slug }) {
+        console.log('articleData:', data);
         return {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Token ${localStorage.getItem('token')}`,
+            Authorization: `Token ${user.token}`,
           },
           url: `/articles/${slug}`,
           method: 'PUT',
-          body: { article: articleData },
+          body: data,
         };
       },
     }),
@@ -68,10 +94,36 @@ export const api = createApi({
         return {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Token ${localStorage.getItem('token')}`,
+            Authorization: `Token ${user.token}`,
           },
           url: `/articles/${slug}`,
           method: 'DELETE',
+        };
+      },
+    }),
+    favoriteArticle: build.mutation({
+      query(slug) {
+        return {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${user.token}`,
+          },
+          url: `/articles/${slug}/favorite`,
+          method: 'POST',
+          invalidatesTags: ['Articles'],
+        };
+      },
+    }),
+    unFavoriteArticle: build.mutation({
+      query(slug) {
+        return {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${user.token}`,
+          },
+          url: `/articles/${slug}/favorite`,
+          method: 'DELETE',
+          invalidatesTags: ['Articles'],
         };
       },
     }),
@@ -87,5 +139,7 @@ export const {
   useCreateArticleMutation,
   useEditArticleMutation,
   useDeleteArticleMutation,
+  useFavoriteArticleMutation,
+  useUnFavoriteArticleMutation,
 } = api;
 export default api;

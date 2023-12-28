@@ -174,7 +174,7 @@ export const EditProfileForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [updateUser, { isLoading, isError }] = useUpdateUserMutation();
+  const [updateUser, {}] = useUpdateUserMutation();
   const usernameSate = useSelector((state) => state.rootReducer.user.username);
   const emailState = useSelector((state) => state.rootReducer.user.email);
 
@@ -208,23 +208,23 @@ export const EditProfileForm = () => {
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </label>
         <label className="input-label">
-          Repeat Password
+          New Password
           <input
-            className={`user-form__input ${errors.newPassword ? 'error' : ''}`}
+            className={`user-form__input ${errors.password ? 'error' : ''}`}
             type="password"
             {...register('newPassword')}
             placeholder="Repeat your password"
           />
-          {errors.newPassword && <ErrorMessage message={errors.newPassword.message} />}
+          {errors.password && <ErrorMessage message={errors.password.message} />}
         </label>
         <label className="input-label">
           Avatar image (url)
           <input
-            className={`user-form__input ${errors.imgUrl ? 'error' : ''}`}
-            {...register('imgUrl')}
+            className={`user-form__input ${errors.image ? 'error' : ''}`}
+            {...register('image')}
             placeholder="Avatar image"
           />
-          {errors.imgUrl && <ErrorMessage message={errors.imgUrl.message} />}
+          {errors.image && <ErrorMessage message={errors.image.message} />}
         </label>
         <Button type="primary" htmlType="submit" style={{ width: '319px', height: '40px', marginTop: '20px' }}>
           Submit

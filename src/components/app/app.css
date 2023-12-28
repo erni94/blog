@@ -1,10 +1,15 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
 }
 
 .shadow-box {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.spin {
+    position: absolute;
+    top: 440px;
 }

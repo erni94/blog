@@ -35,6 +35,7 @@
 
 .header__username {
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .logout-button {
@@ -43,4 +44,5 @@
 
 .header__avatar {
     margin-right: 20px;
+    cursor: pointer;
 }

@@ -30,12 +30,12 @@ const validSchemaLog = yup.object().shape({
 const validSchemaEdit = yup.object().shape({
   username: yup.string().required('Username is required'),
   email: yup.string().email('Invalid email').required('Email is required'),
-  newPassword: yup
+  password: yup
     .string()
     .min(6, 'Password must be at least 6 characters')
     .max(40, 'Password must be at most 40 characters')
     .required('Password is required'),
-  imgUrl: yup.string().url('Invalid URL for image').required('Avatar image URL is required'),
+  image: yup.string().url('Invalid URL for image').required('Avatar image URL is required'),
 });
 
 const validSchemaArticle = yup.object().shape({

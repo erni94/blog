@@ -12,7 +12,6 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.rootReducer.isLoggedIn);
   const username = useSelector((state) => state.rootReducer.user.username);
   const image = useSelector((state) => state.rootReducer.user.image);
-  console.log('isLoggedIn:', isLoggedIn);
 
   if (!isLoggedIn) {
     return (
@@ -38,7 +37,7 @@ const Header = () => {
             Realworld Blog
           </Link>
         </div>
-        <Button onClick={() => navigate('/')} className={'create-article-button'}>
+        <Button onClick={() => navigate('/new-article')} className={'create-article-button'}>
           Create article
         </Button>
         <div className={'header__username'} onClick={() => navigate('/profile')}>

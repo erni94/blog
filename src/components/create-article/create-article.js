@@ -20,7 +20,6 @@ const CreateArticle = (props) => {
   });
 
   const [createArticle, setCreateArticle] = useState(props);
-
   const fetchArticle = props.fetchArticle;
 
   const addTag = (value) => {
@@ -52,7 +51,6 @@ const CreateArticle = (props) => {
         },
       };
       if (props.slug) {
-        console.log(result, props.slug);
         await fetchArticle({
           data: result,
           slug: props.slug,
@@ -109,7 +107,7 @@ const CreateArticle = (props) => {
         </label>
       </div>
 
-      <Button htmlType='submit' className={'create-article__button'} type={'primary'} size={'large'}>
+      <Button htmlType="submit" className={'create-article__button'} type={'primary'} size={'large'}>
         Send
       </Button>
     </form>

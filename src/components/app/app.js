@@ -10,6 +10,8 @@ import LoginPage from '../../routes/loginPage';
 import EditProfilePage from '../../routes/editProfilePage';
 import CreateArticlePage from '../../routes/createArticlePage';
 import EditArticlePage from '../../routes/editArticlePage';
+import PrivateRout from '../hoc/private-rout';
+import NotFoundPage from '../../routes/notFoundPage';
 
 const App = () => {
   return (
@@ -20,9 +22,31 @@ const App = () => {
         <Route path={'articles/:slug'} element={<ArticlePage />} />
         <Route path={'sign-up'} element={<RegisterPage />} />
         <Route path={'sign-in'} element={<LoginPage />} />
-        <Route path={'profile'} element={<EditProfilePage />} />
-        <Route path={'new-article'} element={<CreateArticlePage />} />
-        <Route path={'articles/:slug/edit'} element={<EditArticlePage />} />
+        <Route
+          path={'profile'}
+          element={
+            <PrivateRout>
+              <EditProfilePage />
+            </PrivateRout>
+          }
+        />
+        <Route
+          path={'new-article'}
+          element={
+            <PrivateRout>
+              <CreateArticlePage />
+            </PrivateRout>
+          }
+        />
+        <Route
+          path={'articles/:slug/edit'}
+          element={
+            <PrivateRout>
+              <EditArticlePage />
+            </PrivateRout>
+          }
+        />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
