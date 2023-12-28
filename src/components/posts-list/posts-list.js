@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Pagination, Spin } from 'antd';
 
 import PostHeader from '../post-header/post-header';
 import { useGetArticlesQuery } from '../../store/commonAPI';
-
 import './posts-list.css';
-import { useSelector } from 'react-redux';
 
 const PostsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const offset = (currentPage - 1) * 5;
 
-  const { data, error, isLoading, isFetching } = useGetArticlesQuery(offset);
+  const { data, isLoading, isFetching } = useGetArticlesQuery(offset);
   const isLoggedIn = useSelector((state) => state.rootReducer.isLoggedIn);
 
   const articles = data?.articles || [];

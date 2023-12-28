@@ -21,7 +21,6 @@ const PostHeader = ({ article, shadow, isLoggedIn }) => {
   const [likeArticle, setLikeArticle] = useState(favorited);
   const [favoriteCount, setFavoriteCount] = useState(favoritesCount);
 
-
   const setLike = (value) => {
     if (value) {
       setLikeArticle(true);
@@ -34,27 +33,27 @@ const PostHeader = ({ article, shadow, isLoggedIn }) => {
 
   return (
     <div className={`post ${shadow ? 'shadow-box' : ''}`}>
-      <div className='post__content'>
-        <div className='post__header'>
-          <Link to={`/articles/${slug}`} className='post__title'>
+      <div className="post__content">
+        <div className="post__header">
+          <Link to={`/articles/${slug}`} className="post__title">
             {title}
           </Link>
-          <div className='post__likes'>
+          <div className="post__likes">
             <Favorite isLoggedIn={isLoggedIn} isFavorited={likeArticle} slug={slug} changeLike={setLike} />
             <span className={'post__likes-count'}>{favoriteCount}</span>
           </div>
         </div>
-        <div className='post__tags'>
+        <div className="post__tags">
           {tagList.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
         </div>
-        <div className='post__text'>{description}</div>
+        <div className="post__text">{description}</div>
       </div>
-      <div className='post__user-info'>
-        <div className='user-info'>
-          <div className='user-info__name'>{username}</div>
-          <div className='user-info__date'>{formatDate(createdAt)}</div>
+      <div className="post__user-info">
+        <div className="user-info">
+          <div className="user-info__name">{username}</div>
+          <div className="user-info__date">{formatDate(createdAt)}</div>
         </div>
         <Avatar size={64} src={image} />
       </div>

@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-
 import './create-article.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +12,6 @@ const CreateArticle = (props) => {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
   } = useForm({
     resolver: yupResolver(validSchemaArticle),
     mode: 'onBlur',

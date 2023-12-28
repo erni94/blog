@@ -1,17 +1,17 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Popconfirm, Spin } from 'antd';
+import { useSelector } from 'react-redux';
 
 import { useDeleteArticleMutation, useGetArticleQuery } from '../../store/commonAPI';
 import PostHeader from '../post-header/post-header';
 
 import './article.css';
-import { Button, Popconfirm, Spin } from 'antd';
-import { useSelector } from 'react-redux';
 
 const Article = () => {
   const { slug } = useParams();
-  const { data, error, isLoading } = useGetArticleQuery(slug);
+  const { data, isLoading } = useGetArticleQuery(slug);
 
   const isLoggedIn = useSelector((state) => state.rootReducer.isLoggedIn);
 
@@ -19,7 +19,7 @@ const Article = () => {
   const body = article ? article.body : '';
   const navigate = useNavigate();
 
-  const [deleteArticle, { deleteError, deleteIsLoading }] = useDeleteArticleMutation();
+  const [deleteArticle] = useDeleteArticleMutation();
   const deleteArticleHandler = (slug) => {
     deleteArticle(slug);
     navigate('/');

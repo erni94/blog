@@ -1,29 +1,29 @@
 .article {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-color: #FFF;
-    width: 941px;
-    min-height: 100%;
-    margin-bottom: 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 941px;
+  min-height: 100%;
+  margin-bottom: 25px;
 }
 
 .article-content {
-    padding-left: 19px;
-    padding-right: 49px;
+  padding-left: 19px;
+  padding-right: 49px;
 }
 
 .article-button {
-    display: flex;
-    position: absolute;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    right: 20px;
-    top: 93px;
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  right: 20px;
+  top: 93px;
 }
 
 .edit-button {
-    border-color: #52C41A;
-    color: #52C41A;
+  border-color: #52c41a;
+  color: #52c41a;
 }

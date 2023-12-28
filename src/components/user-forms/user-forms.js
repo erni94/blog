@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Checkbox } from 'antd';
-
 import './user-forms.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +27,7 @@ export const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
 
   const onSubmit = async (data) => {
     try {
@@ -113,7 +112,7 @@ export const LoginForm = () => {
     mode: 'onBlur',
   });
 
-  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -174,7 +173,7 @@ export const EditProfileForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [updateUser, {}] = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
   const usernameSate = useSelector((state) => state.rootReducer.user.username);
   const emailState = useSelector((state) => state.rootReducer.user.email);
 

@@ -26,8 +26,8 @@ const DisabledLike = () => {
 };
 
 const Favorite = ({ isLoggedIn, isFavorited, slug, changeLike }) => {
-  const [favoriteArticle, { error, isLoading }] = useFavoriteArticleMutation();
-  const [unFavoriteArticle, { error2, isLoading2 }] = useUnFavoriteArticleMutation();
+  const [favoriteArticle] = useFavoriteArticleMutation();
+  const [unFavoriteArticle] = useUnFavoriteArticleMutation();
 
   if (isLoggedIn) {
     if (isFavorited) {
