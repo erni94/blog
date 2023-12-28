@@ -8,7 +8,7 @@ const store = configureStore({
     rootReducer: rootReducer,
     [commonAPI.reducerPath]: commonAPI.reducer,
   },
-  devTools: true,
+  devTools: false,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonAPI.middleware),
 });
 
